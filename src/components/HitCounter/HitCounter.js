@@ -1,26 +1,12 @@
+'use client';
+
 import React from 'react';
 
-import {
-    readFile,
-    writeFile,
-  } from '../../helpers/file-helpers';
-  
-  const DATABASE_PATH = '/src/database.json';
-
-function HitCounter() {
-    let { hits } = JSON.parse(
-      readFile(DATABASE_PATH)
-    );
-  
-    hits += 1;
-  
-    writeFile(
-      DATABASE_PATH,
-      JSON.stringify({ hits })
-    );
-  
+function HitCounter({ hits }) {
+    const [isCensored, setIsCensored] = React.useState(false);
+    
     return (
-        <button className="censored">{hits}</button>
+        <button className={isCensored ? 'censored' : undefined} onClick={() => setIsCensored(!isCensored)}>{hits}</button>
     );
   }
 
